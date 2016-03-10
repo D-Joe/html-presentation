@@ -1,0 +1,27 @@
+{
+	"title": "Meine Präsentation",
+	"subtitle": "&lt;Johannes Dobler, root&commat;dobler.email&gt;",
+	"slides": [{
+		"slidetitle": "Slide 1",
+		"points": [
+			"Punkt1",
+			"Punkt2",
+			"Punkt3"
+		]
+	}, {
+		"slidetitle": "Slide 2",
+		"points": [
+			"Punkt1",
+			"Punkt2"
+		]
+	}, {
+		"slidetitle": "Slide 3",
+		"points": [
+			"Punkt1",
+			"Punkt2",
+			"Punkt1",
+			"Punkt2"
+		]
+	}],
+	"end": "Vielen Dank für die Aufmerksamkeit"
+}
