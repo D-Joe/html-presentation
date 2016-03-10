@@ -3,6 +3,7 @@ var ending=document.getElementById('ending');
 var slides=document.getElementById('slides');
 var slide=document.getElementsByClassName('slide');
 var show=document.getElementById('show');
+var progressbar=document.getElementById('progress');
 
 var numberOfSlides;
 var page=-1;
@@ -24,7 +25,6 @@ function fetchJSONFile(path, callback) {
 window.onload = function() {
 	fetchJSONFile('slides.json', function(data){
 		title.innerHTML='<h1>'+data.title+'</h1>'+'<h3>'+data.subtitle+'</h3>';
-		ending.innerHTML='<h1>'+data.end+'</h1>';
 		
 		for (var i = 0; i < Object.keys(data.slides).length; i++)
 		{
@@ -42,8 +42,15 @@ window.onload = function() {
 								'</div>';
 		}
 		
+	
 		show.innerHTML=title.innerHTML;
+		progressbar.style.display='none';
+		
 		numberOfSlides=document.getElementsByClassName('slide').length;
+		
+		ending.innerHTML='<h1>'+data.end+'</h1>';
+		
+		progressbar.max = numberOfSlides;
 	});
 }
 document.onkeydown = checkKey;
@@ -77,12 +84,17 @@ function changePage(page) {
 	if (page < 0) {
 		//Title
 		show.innerHTML=title.innerHTML;
+		progressbar.style.display='none';
 	} else if (page >= 0 && page <= numberOfSlides - 1) {
 		//Slides
 		show.innerHTML=slide[page].innerHTML;
+		progressbar.style.display='';
+		console.log(page);
+		progressbar.value = page + 1;
 
 	} else if (page > numberOfSlides - 1) {
 		//Ending
+		progressbar.style.display='none';
 		show.innerHTML=ending.innerHTML;
 	}
 }

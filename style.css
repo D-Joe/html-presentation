@@ -1,3 +1,42 @@
 #presentation {
 	display: none;
 }
+
+body {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#progress {
+  height: 5px;
+  width: 100%;
+  background-color: #eee;
+  border: none;
+}
+
+/* Foreground Colors   */
+/* IE10 */
+progress {
+    color: #005ab3;
+}
+ 
+/* Firefox */
+progress::-moz-progress-bar { 
+    background: #005ab3;   
+}
+ 
+/* Chrome */
+progress::-webkit-progress-value {
+    background: #005ab3;
+}
+ 
+/* Polyfill */
+progress[aria-valuenow]:before  {
+    background: #005ab3;
+}
+
+#footer {
+  width: 100%;
+  position:fixed;
+  bottom:0px;
+}
