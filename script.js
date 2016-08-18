@@ -24,20 +24,20 @@ function fetchJSONFile(path, callback) {
 
 window.onload = function() {
 	fetchJSONFile('slides.json', function(data){
-		title.innerHTML='<h1>'+data.title+'</h1>'+'<h3>'+data.subtitle+'</h3>';
+		title.innerHTML='<div class="center"><h1>'+data.title+'</h1>'+'<h3>'+data.subtitle+'</h3></div>';
 		
 		for (var i = 0; i < Object.keys(data.slides).length; i++)
 		{
-			var points = '';
-			for (var j = 0; j < Object.keys(data.slides[i].points).length; j++)
+			var bulletPoints = '';
+			for (var j = 0; j < Object.keys(data.slides[i].bulletPoints).length; j++)
 			{
-				points = points + '<li>'+data.slides[i].points[j]+'</li>';
+				bulletPoints = bulletPoints + '<li id="'+j+'" class="'+data.slides[i].bulletPoints[j].css+'">'+data.slides[i].bulletPoints[j].text+'</li>';
 			}
 			slides.innerHTML= slides.innerHTML +
 								'<div class="slide">'+
-									'<h1>'+data.slides[i].slidetitle+'</h1>'+
-									'<ul>'+
-										points +
+									'<h1 class="slidetitle">'+data.slides[i].slidetitle+'</h1>'+
+									'<ul id="list">'+
+										bulletPoints +
 									'</ul>'+
 								'</div>';
 		}
@@ -48,7 +48,7 @@ window.onload = function() {
 		
 		numberOfSlides=document.getElementsByClassName('slide').length;
 		
-		ending.innerHTML='<h1>'+data.end+'</h1>';
+		ending.innerHTML='<div class="center"><h1>'+data.end+'</h1></div>';
 		
 		progressbar.max = numberOfSlides;
 	});
@@ -58,7 +58,7 @@ document.onkeydown = checkKey;
 function checkKey(e) {
 	e = e || window.event;
 	
-	if (e.keyCode == '37') {		//right Key
+	if (e.keyCode == '37') {		//left Key
 		if(page < 0) {
 			page = -1;
 			changePage(page);
@@ -67,8 +67,8 @@ function checkKey(e) {
 			changePage(page);
 		}
 	}
-
-	if (e.keyCode == '39') {		//left Key
+var bla = document.getElementById('list');
+	if (e.keyCode == '39') {		//right Key
 		if(page >= numberOfSlides -1) {
 			page = numberOfSlides;
 			changePage(page);
@@ -89,9 +89,7 @@ function changePage(page) {
 		//Slides
 		show.innerHTML=slide[page].innerHTML;
 		progressbar.style.display='';
-		console.log(page);
 		progressbar.value = page + 1;
-
 	} else if (page > numberOfSlides - 1) {
 		//Ending
 		progressbar.style.display='none';
